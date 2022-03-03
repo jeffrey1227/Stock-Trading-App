@@ -1,18 +1,14 @@
 import './App.css';
-import ResponsiveAppBar from './ResponsiveAppBar';
-import Screener from './Screener';
-import DataTable from './DataTable';
+import ResponsiveAppBar from './features/responsiveAppBar/ResponsiveAppBar';
+import ScreenerPage from './pages/screenerPage';
 
 
 function App() {
-  return (
-    <div>
-      <ResponsiveAppBar />
-      <Screener />
-      <DataTable />
-    </div>
-    
-    
+    return (
+        <div>
+            <ResponsiveAppBar />
+            <ScreenerPage />
+        </div>
     );
 }
 

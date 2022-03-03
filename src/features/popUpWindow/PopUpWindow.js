@@ -10,11 +10,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
-import TabPanel from './TabPanel';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import AdvancedList from './AdvancedList';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
@@ -23,6 +21,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import DialogActions from '@mui/material/DialogActions';
+
+import TabPanel from '../tabPanel/TabPanel';
+import AdvancedList from '../advancedList/AdvancedList';
 
 
 export default function PopUpWindow(props) {

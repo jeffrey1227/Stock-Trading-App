@@ -8,9 +8,9 @@ import Typography from '@mui/material/Typography';
 
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import FilterBar from './FilterBar';
+import FilterBar from '../filterBar/FilterBar';
 import Container from '@mui/material/Container';
-import PopUpWindow from './PopUpWindow';
+import PopUpWindow from '../popUpWindow/PopUpWindow';
 
 
 export default function Screener() {

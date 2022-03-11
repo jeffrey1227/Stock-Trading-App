@@ -37,7 +37,7 @@ const rows = [
 
 export default function DataTable() {
   return (
-    <div style={{ height: 400, width: 1280, marginLeft: 80,}}>
+    <div style={{ height: 400, width: "100%"}}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -45,7 +45,6 @@ export default function DataTable() {
         rowsPerPageOptions={[5]}
         checkboxSelection
       />
-      <Grid style={{ height: 100}}></Grid>
     </div>
   );
 }

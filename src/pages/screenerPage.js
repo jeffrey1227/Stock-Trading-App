@@ -1,14 +1,25 @@
 import React, { Fragment } from 'react';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 import Screener from '../features/screener/Screener';
 import DataTable from '../features/dataTable/DataTable';
-import Container from '@mui/material/Container';
 
 
-function ScreenerPage() {
-  return (
+const ScreenerPage = () => {
+    return (
         <Container maxWidth="lg">
             <Screener />
-            <DataTable />
+            <Box
+                sx={{
+                    my: 5,
+                    mx: {
+                        xs: 0,
+                        lg: 10
+                    }
+                }}
+            >
+                <DataTable />
+            </Box>
         </Container>
     );
 }

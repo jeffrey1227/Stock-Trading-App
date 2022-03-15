@@ -9,9 +9,10 @@ When you are ready:
 1. To run this project, you would need [NodeJS]("https://nodejs.org/en/") installed. Recommended using LTS version.
 2. Open terminal and go to this project directory.
 3. Type `npm install` to install the libraries.
-4. Type `npm run start` to run this web app on your local machine.
-5. Open your web browser and go to `localhost:3000` if it didn't pop up automatically.
-6. Happy coding, or sad coding!
+4. Modify `REACT_APP_API_ENDPOINT` variable to the URL of your backend.
+5. Type `npm run start` to run this web app on your local machine.
+6. Open your web browser and go to `localhost:3000` if it didn't pop up automatically.
+7. Happy coding, or sad coding!
 
 ## Folder structure
 

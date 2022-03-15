@@ -1,4 +1,4 @@
-# Stock Advisor
+# # Stock Trading Advisor Frontend
 
 ## Requirements
 

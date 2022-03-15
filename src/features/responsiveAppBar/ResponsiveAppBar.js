@@ -8,19 +8,16 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import UserMenu from './UserMenu';
 
 const pages = ['Portfolio', 'Screener'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
+// Top Nav bar
 const ResponsiveAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
     const navigate = useNavigate();
 
     const handleOpenNavMenu = (event) => {
@@ -31,6 +28,7 @@ const ResponsiveAppBar = () => {
         setAnchorElNav(null);
     };
 
+    // Switch page when the page menu is clicked
     const navMenuOnClick = (page) => {
         console.log(page);
         navigate("/" + page.toLowerCase());
@@ -107,9 +105,7 @@ const ResponsiveAppBar = () => {
                             </Button>
                         ))}
                     </Box>
-
-                    <UserMenu>
-                    </UserMenu>
+                    <UserMenu />
                 </Toolbar>
             </Container>
         </AppBar>

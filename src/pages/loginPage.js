@@ -28,6 +28,7 @@ const LoginPage = () => {
     const accountToken = useSelector((state) => state.account.token)
     const dispatch = useDispatch()
 
+    // If the user already logged in, redirect to screener page
     React.useEffect(() => {
         console.log(accountToken)
         if (accountToken) {
@@ -35,10 +36,10 @@ const LoginPage = () => {
         }
     }, [accountToken]);
 
+    // Do some very naive sanity check
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
         if (!formData.get("username")) {
             setUserNameHelperText("User name cannot be empty");
             return
@@ -63,7 +64,6 @@ const LoginPage = () => {
             }
         }
     };
-
 
     return (
         <Container component="main" maxWidth="xs">

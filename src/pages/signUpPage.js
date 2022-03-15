@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
+import { useSelector, useDispatch } from 'react-redux'
+import { storeToken } from '../features/account/accountSlice'
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -28,13 +30,18 @@ const SignUpPage = () => {
     const [snackText, setSnackText] = React.useState("");
 
     const [cookies, setCookie] = useCookies(["token"]);
+    const accountToken = useSelector((state) => state.account.token)
+    const dispatch = useDispatch()
 
+    // If the user already logged in, redirect to screener page
     React.useEffect(() => {
-        if (cookies.access_token) {
+        console.log(accountToken)
+        if (accountToken) {
             navigate("/screener");
         }
-    }, [cookies])
+    }, [accountToken]);
 
+    // Do some very naive sanity check
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
@@ -48,7 +55,6 @@ const SignUpPage = () => {
             setPassWordHelperText("Password cannot be empty");
             return
         }
-        // eslint-disable-next-line no-console
         const jsonData = {
             username: formData.get("username"),
             password: formData.get("password"),
@@ -73,11 +79,11 @@ const SignUpPage = () => {
         }
     };
 
+    // Handle snack notification close
     const handleSnackClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
-
         setSnackOpen(false);
     };
 

@@ -5,6 +5,7 @@ import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 
+// Portfolio list item
 const PortfolioItem = (props) => {
     const {
         portfolioOnClick = () => { },

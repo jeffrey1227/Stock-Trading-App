@@ -31,34 +31,16 @@ export default function SelectFilter(props) {
         itemIndex,
         handleConditionChange,
         conditionItem,
-    } = props;
+        removeItem,
+    } = props
 
-    // React.useEffect(() => {
-    //     const timeOutId = setTimeout(() => {setValue1(value1); setValue2(value2)}, 500);
-    //     return () => clearTimeout(timeOutId);
-    //   }, [value1, value2]);
-
-    const handleFilterNameChange = (event) => {
+    // Handle the state change
+    const handleStateChange = (event, stateName) => {
+        // Copy the current state
         let newCond = { ...conditionItem };
-        newCond.filterIdx = event.target.value;
-        handleConditionChange(itemIndex, newCond);
-    };
-
-    const handleComparisonChange = (event) => {
-        let newCond = { ...conditionItem };
-        newCond.comparison = event.target.value;
-        handleConditionChange(itemIndex, newCond);
-    };
-
-    const handleValue1Change = (event) => {
-        let newCond = { ...conditionItem };
-        newCond.value1 = event.target.value;
-        handleConditionChange(itemIndex, newCond);
-    };
-
-    const handleValue2Change = (event) => {
-        let newCond = { ...conditionItem };
-        newCond.value2 = event.target.value;
+        // Modify the value
+        newCond[stateName] = event.target.value;
+        // Pass the new state back
         handleConditionChange(itemIndex, newCond);
     };
 
@@ -66,6 +48,7 @@ export default function SelectFilter(props) {
         <Item>
             <Grid
                 container
+                item
                 direction="row"
                 justifyContent="flex-start"
                 alignItems="center"
@@ -76,44 +59,61 @@ export default function SelectFilter(props) {
                     item
                     xs={12}
                     sm={6}
-                    md={3}
+                    md={4}
                     style={{ padding: 6, fontSize: '20px' }}
                 >
-                    <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Filter Name</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={conditionItem.filterIdx}
-                            label="Filter Name"
-                            name="Filter Name"
-                            onChange={handleFilterNameChange}
-                        >
-                            {filterList.map((filter) =>
-                                <MenuItem
-                                    key={filter['id']}
-                                    value={filter['id']}
+                    {
+                        conditionItem.isAdvanced == false ?
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Filter Name</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={conditionItem.filterIdx}
+                                    label="Filter Name"
+                                    name="Filter Name"
+                                    onChange={(e) => {
+                                        handleStateChange(e, "filterIdx")
+                                    }}
                                 >
-                                    {filter['filter_name']}
-                                </MenuItem>)
-                            }
-                        </Select>
-                    </FormControl>
+                                    {filterList.map((filter) =>
+                                        <MenuItem
+                                            key={filter['id']}
+                                            value={filter['id']}
+                                        >
+                                            {filter['filter_name']}
+                                        </MenuItem>)
+                                    }
+                                </Select>
+                            </FormControl>
+                            :
+                            <TextField
+                                id="standard-basic-value2"
+                                label="Custom formula"
+                                variant="outlined"
+                                value={conditionItem.formula}
+                                onChange={(e) => {
+                                    handleStateChange(e, "formula")
+                                }}
+                                fullWidth
+                            />
+                    }
+
                 </Grid>
                 <Grid
                     container
                     item
                     xs={12}
-                    md={8}
+                    md={7}
                 >
                     {
-                        conditionItem.filterIdx > 1
+                        (conditionItem.filterIdx > 1 || conditionItem.isAdvanced)
                         &&
                         <Grid
                             item
                             xs={12}
                             sm={6}
-                            md={3}
+                            md={6}
                             style={{ padding: 6 }}
                         >
                             <FormControl fullWidth>
@@ -124,8 +124,8 @@ export default function SelectFilter(props) {
                                     value={conditionItem.comparison}
                                     label="Comparator"
                                     name="Comparator"
-                                    onChange={(event) => {
-                                        handleComparisonChange(event);
+                                    onChange={(e) => {
+                                        handleStateChange(e, "comparison")
                                     }}
                                 >
                                     <MenuItem value={10}>greater than</MenuItem>
@@ -137,13 +137,14 @@ export default function SelectFilter(props) {
                         </Grid>
                     }
                     {
-                        conditionItem.filterIdx > 1
+                        (conditionItem.filterIdx > 1 || conditionItem.isAdvanced)
                         &&
                         <Grid
                             container
                             item
                             xs={12}
                             sm={3}
+                            md={3}
                             justifyContent="flex-start"
                             style={{ padding: 6 }}
                         >
@@ -153,7 +154,9 @@ export default function SelectFilter(props) {
                                 variant="outlined"
                                 fullWidth
                                 value={conditionItem.value1}
-                                onChange={handleValue1Change}
+                                onChange={(e) => {
+                                    handleStateChange(e, "value1")
+                                }}
                             />
                         </Grid>
                     }
@@ -165,6 +168,7 @@ export default function SelectFilter(props) {
                             item
                             xs={12}
                             sm={3}
+                            md={3}
                             justifyContent="flex-start"
                             style={{ padding: 6 }}
                         >
@@ -174,7 +178,9 @@ export default function SelectFilter(props) {
                                 variant="outlined"
                                 fullWidth
                                 value={conditionItem.value2}
-                                onChange={handleValue2Change}
+                                onChange={(e) => {
+                                    handleStateChange(e, "value2")
+                                }}
                             />
                         </Grid>
                     }
@@ -191,7 +197,7 @@ export default function SelectFilter(props) {
                         }
                     }}
                 >
-                    <IconButton >
+                    <IconButton onClick={() => { removeItem(conditionItem.id) }}>
                         <CloseIcon />
                     </IconButton>
                 </Grid>

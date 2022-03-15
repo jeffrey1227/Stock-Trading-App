@@ -6,8 +6,8 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Fade from '@mui/material/Fade';
-import Divider from '@mui/material/Divider';
 
+// Stock list item
 const StockItem = (props) => {
 
     const [shouldRaised, setRaised] = React.useState(false);
@@ -55,7 +55,6 @@ const StockItem = (props) => {
                             </IconButton>
                         </Grid>
                     </Fade>
-
                 </Grid>
             </Card>
         </Grid>)

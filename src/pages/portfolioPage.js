@@ -31,20 +31,7 @@ const PortfolioPage = () => {
     const [snackText, setSnackText] = React.useState("");
     const [snackSeverity, setSnackSeverity] = React.useState("success");
 
-    const handleSnackClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setSnackOpen(false);
-    };
-
-    const triggerSnack = (severity, text) => {
-        setSnackSeverity(severity);
-        setSnackText(text);
-        setSnackOpen(true)
-    }
-
+    // Get user's portfolios by account token
     React.useEffect(async () => {
         if (accountToken) {
             try {
@@ -62,11 +49,27 @@ const PortfolioPage = () => {
         }
     }, [accountToken]);
 
+    // Handle snack notification close
+    const handleSnackClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setSnackOpen(false);
+    };
+
+    // Set snack value and show it
+    const triggerSnack = (severity, text) => {
+        setSnackSeverity(severity);
+        setSnackText(text);
+        setSnackOpen(true)
+    }
+
+    // Create new portfolio
     const createPortfolio = React.useCallback(async () => {
         if (!newPortfolioName || !accountToken) {
             return;
         }
-
         try {
             const newPortfolioItem = await PortfolioAPI.CreatePortfolio(newPortfolioName, accountToken);
             if (newPortfolioItem.id != undefined) {
@@ -109,10 +112,6 @@ const PortfolioPage = () => {
                 <Box
                     sx={{
                         my: 5,
-                        mx: {
-                            xs: 0,
-                            lg: 10
-                        }
                     }}
                 >
                     <PortfolioBar

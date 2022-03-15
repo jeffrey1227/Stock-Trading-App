@@ -29,13 +29,21 @@ const UserMenu = () => {
         setAnchorElUser(null);
     };
 
+    // Handle user menu click event 
     const userMenuOnClick = (setting) => {
+        // If a user click logout
         if (setting == "Logout") {
+            // Clean token cookie
             removeCookie("access_token", { path: "/" });
+            // Clean redux state
             dispatch(removeToken());
+            // Redirect to home page
             navigate("/");
+            // Refresh page
             window.location.reload();
         } else if (setting) {
+            // If a user click other button like login and signup
+            // Navigate to that page directly
             navigate("/" + setting.toLowerCase());
         }
         handleCloseUserMenu();

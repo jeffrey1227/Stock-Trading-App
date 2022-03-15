@@ -4,15 +4,15 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+// Dialog component for create portfolio and add new stock
 const NewDialog = (props) => {
     const {
         open = false,
         setOpen = () => { },
-        dialogTitle="",
-        inputLabel="Name",
+        dialogTitle = "",
+        inputLabel = "Name",
         newName = "",
         setNewName = () => { },
         createOnClick = () => { }

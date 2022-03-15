@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import './App.css';
 
+// Set the primarty theme color
 const theme = createTheme({
     palette: {
         primary: {
@@ -25,7 +26,9 @@ const App = () => {
     const [cookies, setCookie] = useCookies(["token"]);
     const dispatch = useDispatch()
 
+    // Check if has logged in
     React.useEffect(() => {
+        // If logged in, set the access token into redux state
         if (cookies.access_token) {
             dispatch(storeToken(cookies.access_token));
         }

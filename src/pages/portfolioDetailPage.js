@@ -21,11 +21,11 @@ import PortfolioAPI from '../api/PortfolioAPI'
 
 
 const PortfolioDetailPage = () => {
+    // Get current portfolio detail id from url
     let { id } = useParams();
     const [cookies, setCookie] = useCookies(["token"]);
     const accountToken = useSelector((state) => state.account.token)
     const dispatch = useDispatch()
-
 
     const [newStockSymbol, setNewStockSymbol] = React.useState("");
     const [isAddDialogOpen, setAddDialogOpen] = React.useState(false);
@@ -34,20 +34,7 @@ const PortfolioDetailPage = () => {
     const [snackText, setSnackText] = React.useState("");
     const [snackSeverity, setSnackSeverity] = React.useState("success");
 
-    const handleSnackClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setSnackOpen(false);
-    };
-
-    const triggerSnack = (severity, text) => {
-        setSnackSeverity(severity);
-        setSnackText(text);
-        setSnackOpen(true)
-    }
-
+    // Get the portfolio information by account token and id
     React.useEffect(async () => {
         if (accountToken && id != undefined) {
             try {
@@ -65,11 +52,26 @@ const PortfolioDetailPage = () => {
         }
     }, [id, accountToken]);
 
+    // Handle snack notification close
+    const handleSnackClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSnackOpen(false);
+    };
+
+    // Set snack value and show it
+    const triggerSnack = (severity, text) => {
+        setSnackSeverity(severity);
+        setSnackText(text);
+        setSnackOpen(true)
+    }
+
+    // Add stock to this portfolio and refresh the page
     const addStock = React.useCallback(async () => {
         if (!accountToken || !newStockSymbol || id == undefined) {
             return;
         }
-
         try {
             const newPortfolioDetail = await PortfolioAPI.AddStockToPortfolio(id, newStockSymbol, accountToken);
             if (newPortfolioDetail.portfolioName != undefined) {
@@ -85,11 +87,11 @@ const PortfolioDetailPage = () => {
 
     }, [accountToken, newStockSymbol, id, setPortfolioDetail])
 
+    // Add the stock from this portfolio
     const removeStock = React.useCallback(async (newStockSymbol) => {
         if (!accountToken || !newStockSymbol || id == undefined) {
             return;
         }
-
         try {
             const newPortfolioDetail = await PortfolioAPI.RemoveStockFromPortfolio(id, newStockSymbol, accountToken);
             if (newPortfolioDetail.portfolioName != undefined) {
@@ -101,7 +103,6 @@ const PortfolioDetailPage = () => {
             console.log(error);
             triggerSnack("error", "Some error happened, please check the console");
         }
-
 
     }, [accountToken, id, setPortfolioDetail])
 
@@ -134,10 +135,6 @@ const PortfolioDetailPage = () => {
                 <Box
                     sx={{
                         my: 5,
-                        mx: {
-                            xs: 0,
-                            lg: 10
-                        }
                     }}
                 >
                     <PortfolioBar

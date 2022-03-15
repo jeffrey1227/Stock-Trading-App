@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const PortfolioAPI = {
     /**
-     * Login.
+     * Get user's portfolio.
      *
      * @param {String} token - Access token.
      * 
@@ -25,9 +25,10 @@ const PortfolioAPI = {
      * Create Portfolio.
      *
      * 
-     * @param {string} portfolioName Portfolio Name
+     * @param {string} portfolioName Portfolio name
      * @param {String} token - Access token.
      * 
+     * @return {Object} New portfolio item
      */
     CreatePortfolio: async (portfolioName, token) => {
         try {
@@ -46,12 +47,13 @@ const PortfolioAPI = {
         }
     },
     /**
-     * Get Portfolio Detail.
+     * Get portfolio detail by id.
      *
      * 
      * @param {string} id Portfolio id
      * @param {String} token - Access token.
      * 
+     * @return {Object} Portfolio detail
      */
     GetPortfolioDetail: async (id, token) => {
         try {
@@ -67,12 +69,14 @@ const PortfolioAPI = {
         }
     },
     /**
-     * Get Portfolio Detail.
+     * Add stock into the portfolio
      *
      * 
      * @param {string} id Portfolio id
+     * @param {String} symbol - Stock Symbol.
      * @param {String} token - Access token.
      * 
+     * @return {Object} New portfolio detail
      */
     AddStockToPortfolio: async (id, symbol, token) => {
         try {
@@ -96,7 +100,10 @@ const PortfolioAPI = {
      *
      * 
      * @param {string} id Portfolio id
+     * @param {String} symbol - Stock Symbol.
      * @param {String} token - Access token.
+     * 
+     * @return {Object} New portfolio detail
      * 
      */
      RemoveStockFromPortfolio: async (id, symbol, token) => {

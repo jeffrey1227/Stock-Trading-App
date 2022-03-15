@@ -6,8 +6,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 
+// Portfolio operation bar
 const PortfolioBar = (props) => {
-
     const {
         newButtonClick = () => { },
         title = "Portfolios",
